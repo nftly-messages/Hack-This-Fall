@@ -34,7 +34,7 @@ def get_userdata(payload):
     else:
         return users.setdefault(user_id, make_data(payload))
 
-def get_posts(num=10, page=0, user=None):
+def get_posts(num=5, page=0, user=None):
     if user:
         lposts = [posts[str(p)] for p in users[user]['posts']]
     else:
