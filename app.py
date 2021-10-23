@@ -36,10 +36,16 @@ def set_payload(payload):
     resp.set_cookie('userID', b64payload)
     return resp
 
+def pint(s):
+    try:
+        return int(s)
+    except:
+        return
+
 @app.route('/')
 def index():
-    num = request.args.get('n') or 10
-    page = request.args.get('p') or 0
+    num = pint(request.args.get('n')) or 10
+    page = pint(request.args.get('p')) or 0
     payload = get_payload()
     if payload and verifyToken(payload):
         return render_template('index.html', userdata=users.get_userdata(payload), posts=users.get_posts(num, page))
