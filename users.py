@@ -5,7 +5,7 @@ import base64
 with open('database/backup', 'r+') as backup:
     data = json.loads(backup.read() or '{}')
     users = data.get('users') or {}
-    posts = data.get('posts') or []
+    posts = data.get('posts') or {}
     pid = data.get('pid') or 0
 
 @atexit.register
@@ -36,9 +36,9 @@ def get_userdata(payload):
 
 def get_posts(num=10, page=0, user=None):
     if user:
-        lposts = [posts[p] for p in users[user]['posts'] if posts[p]]
+        lposts = [posts[p] for p in users[user]['posts']]
     else:
-        lposts = [p for p in posts if p]
+        lposts = list(posts.values())
     return sorted(lposts[page:page + num], key=getscore)[::-1]
 
 def make_post(payload, **data):
@@ -46,19 +46,19 @@ def make_post(payload, **data):
         return
     global pid
     user_id = payload['identifier']
-    posts.append({
+    posts[pid] = {
         'pid': pid,
         'user': user_id,
         'text': data.get('text'),
         'up': [],
         'down': []
-    })
+    }
     userdata = get_userdata(payload)
     userdata['posts'].append(pid)
     pid += 1
 
 def upvote(payload, pid):
-    if not posts or pid < 0 or pid > len(posts):
+    if pid not in posts:
         return -1
     post = posts[pid]
     user_id = payload['identifier']
@@ -73,7 +73,7 @@ def upvote(payload, pid):
     return 1
 
 def downvote(payload, pid):
-    if not posts or pid < 0 or pid > len(posts):
+    if pid not in posts:
         return -1
     post = posts[pid]
     user_id = payload['identifier']
@@ -99,3 +99,11 @@ def get_post(pid):
         return posts[int(pid)]
     except Exception as e:
         return None
+
+def delete_post(userdata, post_id):
+    if post_id not in userdata['posts']:
+        return
+    if post_id not in posts:
+        return
+    userdata['posts'].remove(post_id)
+    del posts[post_id]

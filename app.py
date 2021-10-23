@@ -127,8 +127,7 @@ def delete_post(pid):
     post_id = pint(post_id)
     if post_id is None or post_id not in userdata['posts']:
         return make_response({'failed': 'not found'}, 404)
-    userdata['posts'].remove(post_id)
-    users.posts[post_id] = None
+    users.delete_post(userdata, post_id)
     return make_response({}, 200)
 
 @app.template_filter('get_score')
