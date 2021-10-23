@@ -87,6 +87,12 @@ def login():
         return set_payload(payload)
     return {'status': 404}
 
+@app.route("/logout", methods=['POST'])
+def logout():
+    resp = make_response(redirect('/'))
+    resp.set_cookie('userID', '', expires=0)
+    return 
+
 @app.route("/new_post", methods=["POST"])
 def new_post():
     payload = get_payload()
