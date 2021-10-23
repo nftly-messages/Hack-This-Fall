@@ -48,9 +48,9 @@ def index():
     page = pint(request.args.get('p')) or 0
     payload = get_payload()
     if payload and verifyToken(payload):
-        return render_template('index.html', userdata=users.get_userdata(payload), posts=users.get_posts(num, page))
+        return render_template('index.html', userdata=users.get_userdata(payload), posts=users.get_posts(num, page), page=p)
     else:
-        return render_template('index.html', posts=users.get_posts(num, page))
+        return render_template('index.html', posts=users.get_posts(num, page), page=p)
 
 @app.route('/user')
 def user():
