@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, make_response, redirect, url_for
+from flask import Flask, render_template, request, make_response, redirect, url_for, send_file
 from sawo import createTemplate
 import requests
 import json
@@ -104,12 +104,19 @@ def vote(pid, direction):
         return {'status': 200}
     return {'status': 404}
 
+@app.route("/photos/<pid>")
+def get_photo(pid):
+    post = user.get_post(pid)
+    if post is None:
+        return send_file(url_for('static', filename='error.png'), mimetype='image/png')
+    return send_file(f'database/photos/{pid}.img', mimetype='image/png')
+
 @app.template_filter('get_score')
 def get_score(userdata):
     return users.get_score(userdata)
 
 @app.template_filter('get_image')
 def get_image(post):
-    return url_for('database/photos', filename=f'{post["pid"]}.img')
+    return f'photos/{post['pid']}'
 
 app.run()
