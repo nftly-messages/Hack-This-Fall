@@ -118,6 +118,19 @@ def vote(pid, direction):
         return {'status': 200}
     return {'status': 404}
 
+@app.route("/delete/<pid>", methods=['POST'])
+def delete_post(pid):
+    payload = get_payload()
+    if not (payload and verifyToken(payload)):
+        return make_response({'failed': 'not authenticated'}, 403)
+    userdata = users.get_userdata(payload)
+    post_id = pint(post_id)
+    if post_id is None or post_id not in userdata['posts']:
+        return make_response({'failed': 'not found'}, 404)
+    userdata['posts'].remove(post_id)
+    users.posts[post_id] = None
+    return make_response({}, 200)
+
 @app.template_filter('get_score')
 def get_score(userdata):
     return users.get_score(userdata)
