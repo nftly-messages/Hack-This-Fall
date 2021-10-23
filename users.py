@@ -99,6 +99,6 @@ def get_score(userdata):
 
 def get_post(pid):
     try:
-        return posts[pid]
+        return posts[int(pid)]
     except:
         return None
