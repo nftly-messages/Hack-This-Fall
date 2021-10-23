@@ -36,7 +36,7 @@ def get_userdata(payload):
 
 def get_posts(num=10, page=0, user=None):
     if user:
-        lposts = [posts[p] for p in users[user]['posts']]
+        lposts = [posts[str(p)] for p in users[user]['posts']]
     else:
         lposts = list(posts.values())
     return sorted(lposts[page:page + num], key=getscore)[::-1]
@@ -46,7 +46,7 @@ def make_post(payload, **data):
         return
     global pid
     user_id = payload['identifier']
-    posts[pid] = {
+    posts[str(pid)] = {
         'pid': pid,
         'user': user_id,
         'text': data.get('text'),
@@ -58,9 +58,9 @@ def make_post(payload, **data):
     pid += 1
 
 def upvote(payload, pid):
-    if pid not in posts:
+    post = get_post(pid)
+    if post is None:
         return -1
-    post = posts[pid]
     user_id = payload['identifier']
     ups = post['up']
     downs = post['down']
@@ -73,9 +73,9 @@ def upvote(payload, pid):
     return 1
 
 def downvote(payload, pid):
-    if pid not in posts:
+    post = get_post(pid)
+    if post is None:
         return -1
-    post = posts[pid]
     user_id = payload['identifier']
     ups = post['up']
     downs = post['down']
@@ -90,20 +90,20 @@ def downvote(payload, pid):
 def get_score(userdata):
     score = 0
     for post_id in userdata['posts']:
-        post = posts[post_id]
-        score += len(post['up']) - len(post['down'])
+        post = get_post(post_id)
+        score += (len(post['up']) - len(post['down'])) if post else 0
     return score
 
 def get_post(pid):
     try:
-        return posts[int(pid)]
+        return posts[str(pid)]
     except Exception as e:
         return None
 
 def delete_post(userdata, post_id):
     if post_id not in userdata['posts']:
         return
-    if post_id not in posts:
+    if str(post_id) not in posts:
         return
     userdata['posts'].remove(post_id)
-    del posts[post_id]
+    del posts[str(post_id)]
