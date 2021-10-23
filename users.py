@@ -2,7 +2,7 @@ import atexit
 import json
 import base64
 
-with open('database/backup', 'w+') as backup:
+with open('database/backup', 'r+') as backup:
     data = json.loads(backup.read() or '{}')
     users = data.get('users') or {}
     posts = data.get('posts') or []
@@ -15,7 +15,6 @@ def backup():
         'posts': posts,
         'pid': pid
     }
-    print(data)
     with open('database/backup', 'w') as backup:
         json.dump(data, backup)
 
