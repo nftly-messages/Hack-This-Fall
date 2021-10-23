@@ -15,12 +15,12 @@ with open('database/backup', 'w+') as backup:
 
 @atexit.register
 def backup():
-    print('i ran')
     data = {
         'users': users,
         'posts': posts,
         'pid': pid
     }
+    print(data)
     with open('database/backup', 'w') as backup:
         json.dump(data, backup)
 
