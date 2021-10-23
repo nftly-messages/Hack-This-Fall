@@ -2,7 +2,7 @@
 <br>
 <div class="center" name="{{ post['pid'] }}">
 <p>
-<b>{{ post['user'] }}</b>
+<b>{{ post['user'].split('@')[0] }}</b>
 <b style="float: right">{{ post['up'].__len__() - post['down'].__len__() }}</b>
 <p>
   {{ post['text'] }}
