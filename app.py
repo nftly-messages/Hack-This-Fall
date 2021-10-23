@@ -91,7 +91,7 @@ def login():
 def logout():
     resp = make_response(redirect('/'))
     resp.set_cookie('userID', '', expires=0)
-    return 
+    return resp
 
 @app.route("/new_post", methods=["POST"])
 def new_post():
