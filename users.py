@@ -59,7 +59,7 @@ def make_post(payload, **data):
 
 def upvote(payload, pid):
     post = get_post(pid)
-    if post is None:
+    if post is None or not payload:
         return -1
     user_id = payload['identifier']
     ups = post['up']
@@ -74,7 +74,7 @@ def upvote(payload, pid):
 
 def downvote(payload, pid):
     post = get_post(pid)
-    if post is None:
+    if post is None or not payload:
         return -1
     user_id = payload['identifier']
     ups = post['up']
