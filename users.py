@@ -3,12 +3,7 @@ import json
 import base64
 
 with open('database/backup', 'w+') as backup:
-    try:
-        data = json.loads(backup.read())
-    except Exception as e:
-        print(e)
-        data = {}
-        backup.write('{}')
+    data = json.loads(backup.read() or '{}')
     users = data.get('users') or {}
     posts = data.get('posts') or []
     pid = data.get('pid') or 0
