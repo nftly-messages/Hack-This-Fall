@@ -1,0 +1,26 @@
+{% for post in posts %}
+<br>
+<div class="center" name="{{ post['pid'] }}">
+<p>
+<b>{{ post['user'] }}</b>
+<p>
+{% if post.get('img') %}
+<img src="{{ post['img'] }}" width="400" height="400"/>
+{% endif %}
+<p>
+  {{ post['text'] }}
+</p>
+<div class="center">
+<input type="submit" value="UP" onclick="vote({{ post['pid'] }}, 'up')">
+<b>{{ post['up'].__len__() - post['down'].__len__() }}</b>
+<input type="submit" value="DOWN" onclick="vote({{ post['pid'] }}, 'down')">
+</div>
+<p>
+</div>
+{% endfor %}
+<script>
+function vote(pid, direction) {
+  post_request(`/vote/${pid}/${direction}`);
+  window.location.reload();
+}
+</script>

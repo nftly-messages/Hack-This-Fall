@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include './partials/header.html' %}
+{% include './partials/nav.html' %}
+<body style="background-color:#333">
+{% include './partials/posts.html' %}
+<form action='/new_post' method='post'>
+  <input type="hidden" name="img" id="real_image">
+  <label for="content">Content</label><br>
+  <textarea name="text" id="content" cols="30" rows="2"></textarea><br>
+  <label for="image">Image</label><br>
+	<input type="file" id="image" name="file" onchange="convertFile()"/><br>
+  <input type="submit" value="Submit">
+</form>
+<script>
+function convertFile() {
+  var fileInput = document.getElementById("image");
+  var imgInput = document.getElementById("real_image")
+  const reader = new FileReader();
+  reader.addEventListener("load", function () {
+    imgInput.value = reader.result;
+  }, false);
+  reader.readAsDataURL(fileInput.files[0]);
+}
+</script>
+</body>
+</html>
