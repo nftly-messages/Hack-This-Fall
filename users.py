@@ -39,7 +39,7 @@ def get_posts(num=10, page=0, user=None):
         lposts = [posts[str(p)] for p in users[user]['posts']]
     else:
         lposts = list(posts.values())
-    return sorted(lposts[page:page + num], key=getscore)[::-1]
+    return sorted(lposts[(page + 1) * num:(page + 1) * (num * 2)], key=getscore)[::-1]
 
 def make_post(payload, **data):
     if not data.get('text'):
