@@ -124,7 +124,7 @@ def delete_post(pid):
     if not (payload and verifyToken(payload)):
         return make_response({'failed': 'not authenticated'}, 403)
     userdata = users.get_userdata(payload)
-    post_id = pint(post_id)
+    post_id = pint(pid)
     if post_id is None or post_id not in userdata['posts']:
         return make_response({'failed': 'not found'}, 404)
     users.delete_post(userdata, post_id)
