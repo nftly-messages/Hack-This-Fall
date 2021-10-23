@@ -47,7 +47,6 @@ function check_words(e) {
     var MAX_WORDS  = 50;
     var valid_keys = [BACKSPACE, DELETE];
     var words      = this.value.split(' ');
-
     if (words.length >= MAX_WORDS && valid_keys.indexOf(e.keyCode) == -1) {
         e.preventDefault();
         words.length = MAX_WORDS;
