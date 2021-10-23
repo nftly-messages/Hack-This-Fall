@@ -6,8 +6,8 @@
 <p>
   {{ post['text'] }}
 </p>
-<div>
-<input class="center" type="submit" value="NFTLY!" onclick="vote({{ post['pid'] }}, 'up')">
+<div  class="updown">
+<input type="submit" value="NFTLY!" onclick="vote({{ post['pid'] }}, 'up')">
 <b>{{ post['up'].__len__() - post['down'].__len__() }}</b>
 <input type="submit" value="NOT NFTLY!" onclick="vote({{ post['pid'] }}, 'down')">
 </div>
