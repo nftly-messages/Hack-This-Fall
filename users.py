@@ -46,7 +46,7 @@ def make_post(payload, **data):
     user_id = payload['identifier']
     img_data = data.get('img')
     if img_data:
-        with open(f'database/photos/{pid}.img', 'wb+') as f:
+        with open(f'database/photos/{pid}.png', 'wb+') as f:
             f.write(base64.b64decode(img_data))
     posts.append({
         'pid': pid,
