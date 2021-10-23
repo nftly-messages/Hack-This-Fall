@@ -44,7 +44,7 @@ def pint(s):
 
 @app.route('/')
 def index():
-    num = pint(request.args.get('n')) or 10
+    num = pint(request.args.get('n')) or 5
     page = pint(request.args.get('p')) or 0
     payload = get_payload()
     if payload and verifyToken(payload):
