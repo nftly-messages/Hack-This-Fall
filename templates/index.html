@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 {% include './partials/header.html' %}
 {% include './partials/nav.html' %}
 
 	<body style="background-color:#333">
 		{% include './partials/posts.html' %}
-		<a class="pagebuttonz" href="/?p={{ page - 1 }}">
+		<div class="centerfr">
+		<a class="pagebuttons" href="/?p={{ page - 1 }}">
 			Back Page
 		</a>
-		<a style="float: center;" class="pagebuttons" href="/?p={{ page + 1 }}">
+		<a class="pagebuttons" href="/?p={{ page + 1 }}">
 			Next Page
 		</a>
+		</div>
 	</body>
 </html>
