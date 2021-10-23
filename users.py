@@ -99,6 +99,7 @@ def get_score(userdata):
 
 def get_post(pid):
     try:
+        breakpoint()
         return posts[int(pid)]
     except:
         return None
