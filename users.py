@@ -2,11 +2,8 @@ import atexit
 import json
 import base64
 
-with open('database/backup', 'w+') as backup:
-    try:
-        data = json.load(backup)
-    except:
-        data = {}
+with open('database/backup', 'r+') as backup:
+    data = json.loads(backup.read() or '{}')
     users = data.get('users') or {}
     posts = data.get('posts') or []
     pid = data.get('pid') or 0

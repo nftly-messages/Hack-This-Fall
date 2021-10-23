@@ -7,7 +7,7 @@
   <div class="topnav_right" style="font-family: Monospace">
     <a href='login_page'>
 			{% if userdata is defined %}
-				User {{ userdata | get_score }}
+				User: {{ userdata['username'].split('@')[0] }} Score: {{ userdata | get_score }}
 			{% else %}
 				Login
 			{% endif %}
