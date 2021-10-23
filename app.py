@@ -133,3 +133,9 @@ def delete_post(pid):
 @app.template_filter('get_score')
 def get_score(userdata):
     return users.get_score(userdata)
+
+def get_app():
+    return app
+
+if __name__ == '__main__':
+    app.run()
