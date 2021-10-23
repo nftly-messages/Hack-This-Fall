@@ -4,7 +4,7 @@ import base64
 
 with open('database/backup', 'w+') as backup:
     try:
-        data = json.load(backup)
+        data = json.loads(backup.read())
     except Exception as e:
         print(e)
         data = {}
