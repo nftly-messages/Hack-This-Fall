@@ -117,6 +117,6 @@ def get_score(userdata):
 
 @app.template_filter('get_image')
 def get_image(post):
-    return f'photos/{post['pid']}'
+    return f'photos/{post["pid"]}'
 
 app.run()
