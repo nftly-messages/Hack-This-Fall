@@ -107,8 +107,8 @@ def vote(pid, direction):
 @app.route("/photos/<pid>")
 def get_photo(pid):
     post = users.get_post(pid)
-    if post is None:
-        return send_file(url_for('static', filename='error.png'), mimetype='image/png')
+    if post is None or not post['has_image']:
+        return send_file('static/error.png', mimetype='image/png')
     return send_file(f'database/photos/{pid}.img', mimetype='image/png')
 
 #I MADE A CHANGE WORK
