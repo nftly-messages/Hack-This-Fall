@@ -42,6 +42,8 @@ def get_posts(num=10, page=0, user=None):
     return sorted(lposts[page:page + num], key=getscore)[::-1]
 
 def make_post(payload, **data):
+    if not data.get('text'):
+        return
     global pid
     user_id = payload['identifier']
     posts.append({
