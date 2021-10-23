@@ -3,12 +3,12 @@
 <div class="center" name="{{ post['pid'] }}">
 <p>
 <b>{{ post['user'] }}</b>
+<b style="float: right">{{ post['up'].__len__() - post['down'].__len__() }}</b>
 <p>
   {{ post['text'] }}
 </p>
 <div  class="updown">
 <input class="buttonz" type="submit" value="  NFTLY!  " onclick="vote({{ post['pid'] }}, 'up')">
-<b>{{ post['up'].__len__() - post['down'].__len__() }}</b>
 <input class="buttonz" type="submit" value="NOT NFTLY!" onclick="vote({{ post['pid'] }}, 'down')">
 {% if userdata is defined and post['pid'] in userdata['posts'] %}
 <input class="deletebutton" type="submit" value="Delete" onclick="post_request('delete/{{ post['pid'] }}');window.location.reload()">
