@@ -98,5 +98,4 @@ def get_post(pid):
     try:
         return posts[int(pid)]
     except Exception as e:
-        print(e)
         return None
