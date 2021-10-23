@@ -40,4 +40,23 @@
   </div>
 </form>
 </body>
+<script>
+function check_words(e) {
+    var BACKSPACE  = 8;
+    var DELETE     = 46;
+    var MAX_WORDS  = 20;
+    var valid_keys = [BACKSPACE, DELETE];
+    var words      = this.value.split(' ');
+
+    if (words.length >= MAX_WORDS && valid_keys.indexOf(e.keyCode) == -1) {
+        e.preventDefault();
+        words.length = MAX_WORDS;
+        this.value = words.join(' ');
+    }
+}
+
+var textarea = document.getElementById('content');
+textarea.addEventListener('keydown', check_words);
+textarea.addEventListener('keyup', check_words);
+</script>
 </html>
