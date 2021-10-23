@@ -104,21 +104,8 @@ def vote(pid, direction):
         return {'status': 200}
     return {'status': 404}
 
-@app.route("/photos/<pid>")
-def get_photo(pid):
-    post = users.get_post(pid)
-    if post is None or not post['has_image']:
-        return send_file('static/error.png', mimetype='image/png')
-    return send_file(f'database/photos/{pid}.png', mimetype='image/png')
-
-#I MADE A CHANGE WORK
-
 @app.template_filter('get_score')
 def get_score(userdata):
     return users.get_score(userdata)
-
-@app.template_filter('get_image')
-def get_image(post):
-    return f'photos/{post["pid"]}'
 
 app.run()

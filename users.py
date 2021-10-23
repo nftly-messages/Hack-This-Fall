@@ -44,15 +44,10 @@ def get_posts(num=10, page=0, user=None):
 def make_post(payload, **data):
     global pid
     user_id = payload['identifier']
-    img_data = data.get('img')
-    if img_data:
-        with open(f'database/photos/{pid}.png', 'wb+') as f:
-            f.write(base64.b64decode(img_data))
     posts.append({
         'pid': pid,
         'user': user_id,
         'text': data.get('text'),
-        'has_image': bool(img_data),
         'up': [],
         'down': []
     })
