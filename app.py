@@ -106,10 +106,12 @@ def vote(pid, direction):
 
 @app.route("/photos/<pid>")
 def get_photo(pid):
-    post = user.get_post(pid)
+    post = users.get_post(pid)
     if post is None:
         return send_file(url_for('static', filename='error.png'), mimetype='image/png')
     return send_file(f'database/photos/{pid}.img', mimetype='image/png')
+
+#I MADE A CHANGE WORK
 
 @app.template_filter('get_score')
 def get_score(userdata):
