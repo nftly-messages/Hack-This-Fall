@@ -7,6 +7,7 @@ with open('database/backup', 'w+') as backup:
         data = json.load(backup)
     except:
         data = {}
+        backup.write('{}')
     users = data.get('users') or {}
     posts = data.get('posts') or []
     pid = data.get('pid') or 0
