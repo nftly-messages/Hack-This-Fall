@@ -96,3 +96,9 @@ def get_score(userdata):
         post = posts[post_id]
         score += len(post['up']) - len(post['down'])
     return score
+
+def get_post(pid):
+    try:
+        return posts[pid]
+    except:
+        return None
