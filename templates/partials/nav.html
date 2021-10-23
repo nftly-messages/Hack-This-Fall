@@ -3,6 +3,9 @@
 	<div class="topnav_left" style="font-family: Monospace">
 	  <a class="active" href="/">Home</a>
 	  <a href="about">About</a>
+    {% if userdata is defined %}
+      <a href="logout">Logout</a>
+    {% endif %}
 	</div>
   <div class="topnav_right" style="font-family: Monospace">
     <a href='login_page'>
