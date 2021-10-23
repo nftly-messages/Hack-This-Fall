@@ -5,7 +5,8 @@ import base64
 with open('database/backup', 'w+') as backup:
     try:
         data = json.load(backup)
-    except:
+    except Exception as e:
+        print(e)
         data = {}
         backup.write('{}')
     users = data.get('users') or {}
