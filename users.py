@@ -1,5 +1,6 @@
 import atexit
 import json
+import base64
 
 with open('database/backup', 'r') as backup:
     data = json.load(backup)
@@ -43,11 +44,15 @@ def get_posts(num=10, page=0, user=None):
 def make_post(payload, **data):
     global pid
     user_id = payload['identifier']
+    img_data = data.get('img')
+    if img_data:
+        with open(f'/photos/{pid}.img', 'wb+') as f:
+            f.write(base64.decode(img_data))
     posts.append({
         'pid': pid,
         'user': user_id,
         'text': data.get('text'),
-        'img': data.get('img'),
+        'has_image': bool(img_data),
         'up': [],
         'down': []
     })

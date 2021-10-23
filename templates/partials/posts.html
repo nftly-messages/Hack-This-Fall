@@ -4,8 +4,8 @@
 <p>
 <b>{{ post['user'] }}</b>
 <p>
-{% if post.get('img') %}
-<img src="{{ post['img'] }}" width="400" height="400"/>
+{% if post['has_image'] %}
+<img src="{{ post | get_image }}" width="400" height="400"/>
 {% endif %}
 <p>
   {{ post['text'] }}

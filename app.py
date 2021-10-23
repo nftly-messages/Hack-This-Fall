@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, make_response, redirect
+from flask import Flask, render_template, request, make_response, redirect, url_for
 from sawo import createTemplate
 import requests
 import json
@@ -107,5 +107,9 @@ def vote(pid, direction):
 @app.template_filter('get_score')
 def get_score(userdata):
     return users.get_score(userdata)
+
+@app.template_filter('get_image')
+def get_image(post):
+    return url_for('database/photos', filename=f'{post["pid"]}.img')
 
 app.run()

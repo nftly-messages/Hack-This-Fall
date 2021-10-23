@@ -17,7 +17,7 @@
 		background-color: #448feb;
 		font-size: 20px;
 	}
-	
+
 	h1 {
 		color: #f2f2f2;
 		text-align: center;
@@ -49,7 +49,7 @@ function convertFile() {
   var imgInput = document.getElementById("real_image")
   const reader = new FileReader();
   reader.addEventListener("load", function () {
-    imgInput.value = reader.result;
+    imgInput.value = reader.result.replace(/^data:image\/(png|jpg);base64,/, "");
   }, false);
   reader.readAsDataURL(fileInput.files[0]);
 }
