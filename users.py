@@ -36,9 +36,9 @@ def get_userdata(payload):
 
 def get_posts(num=10, page=0, user=None):
     if user:
-        lposts = [posts[p] for p in users[user]['posts']]
+        lposts = [posts[p] for p in users[user]['posts'] if posts[p]]
     else:
-        lposts = posts
+        lposts = [p for p in posts if p]
     return sorted(lposts[page:page + num], key=getscore)[::-1]
 
 def make_post(payload, **data):
