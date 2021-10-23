@@ -1,16 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+	.contentx{
+		text-decoration: underline;
+		font-size: 35px;
+		color: #f2f2f2;
+		text-align: center;
+		overflow: hidden;
+		padding:0;
+		margin:0;
+		border:0;
+	}
+	.submit {
+		text-color: #f2f2f2;
+		padding: 5px 5px 10px 10px;
+		background-color: #448feb;
+		font-size: 20px;
+	}
+	
+	h1 {
+		color: #f2f2f2;
+		text-align: center;
+		font-size: 50px;
+		font-family: Monospace;
+		padding: 20px 0px 0px 0px;
+	}
+</style>
 {% include './partials/header.html' %}
 {% include './partials/nav.html' %}
 <body style="background-color:#333">
 {% include './partials/posts.html' %}
 <form action='/new_post' method='post'>
+	<h1>New Post:</h1>
+  <div class="contentx">
+  <label for="image">Image</label><br>
+  <input type="file" id="image" name="file" onchange="convertFile()"/><br>
   <input type="hidden" name="img" id="real_image">
   <label for="content">Content</label><br>
-  <textarea name="text" id="content" cols="30" rows="2"></textarea><br>
-  <label for="image">Image</label><br>
-	<input type="file" id="image" name="file" onchange="convertFile()"/><br>
-  <input type="submit" value="Submit">
+  <textarea name="text" id="content" cols="50" rows="4"></textarea><br>
+  <div  style="submit">
+  <input type="submit" value="Make it NFTLY!">
+  </div>
+  </div>
 </form>
 <script>
 function convertFile() {
