@@ -47,7 +47,7 @@ def make_post(payload, **data):
     txt = data.get('text')
     if txt is None:
         return
-    for p in posts:
+    for p in posts.values():
         if p['text'] == txt:
             return
     global pid
