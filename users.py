@@ -47,15 +47,16 @@ def make_post(payload, **data):
     txt = data.get('text')
     if not txt or not txt.strip():
         return
+    h = hash(txt.strip())
     for p in posts.values():
-        if p['text'] == txt:
+        if hash(p['text']) == h:
             return
     global pid
     user_id = payload['identifier']
     posts[str(pid)] = {
         'pid': pid,
         'user': user_id,
-        'text': data.get('text'),
+        'text': data.get('text').strip(),
         'up': [],
         'down': []
     }
