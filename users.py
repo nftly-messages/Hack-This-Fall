@@ -45,7 +45,7 @@ def get_posts(num=5, page=0, user=None):
 
 def make_post(payload, **data):
     txt = data.get('text')
-    if txt is None:
+    if not txt or not txt.strip():
         return
     for p in posts.values():
         if p['text'] == txt:
