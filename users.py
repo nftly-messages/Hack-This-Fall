@@ -44,8 +44,12 @@ def get_posts(num=5, page=0, user=None):
     return lposts[index: index + num]
 
 def make_post(payload, **data):
-    if not data.get('text'):
+    txt = data.get('text')
+    if txt is None:
         return
+    for p in posts:
+        if p['text'] == txt:
+            return
     global pid
     user_id = payload['identifier']
     posts[str(pid)] = {
